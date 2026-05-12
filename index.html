@@ -1,261 +1,920 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mrs Mops – Cleaning & Housekeeping | Hexham & Tyne Valley</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --cream: #FAF7F2; --warm-white: #FFF9F0; --sage: #7A9E7E; --sage-light: #A8C5AB;
-    --sage-dark: #4E7254; --terracotta: #C4714A; --brown: #5C3D2E; --text: #2E2520;
-    --text-mid: #6B5E57; --text-light: #9C8E88; --border: #E8DDD5;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
-  .hero { min-height: 100vh; background: var(--warm-white); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(122,158,126,0.12) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(196,113,74,0.07) 0%, transparent 60%); pointer-events: none; }
-  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 80px 60px 80px 80px; position: relative; z-index: 1; animation: fadeUp 0.9s ease both; }
-  .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--sage-light); color: var(--sage-dark); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 16px; border-radius: 100px; margin-bottom: 32px; width: fit-content; }
-  .badge::before { content: '📍'; font-size: 0.9em; }
-  h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5vw, 4.8rem); line-height: 1.08; color: var(--brown); margin-bottom: 24px; }
-  h1 em { font-style: italic; color: var(--sage-dark); }
-  .hero-desc { font-size: 1.15rem; color: var(--text-mid); line-height: 1.7; max-width: 400px; margin-bottom: 44px; font-weight: 300; }
-  .cta-group { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn-primary { background: var(--terracotta); color: #fff; padding: 16px 32px; border-radius: 100px; font-size: 1rem; font-weight: 500; text-decoration: none; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(196,113,74,0.3); }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,113,74,0.4); }
-  .btn-secondary { background: transparent; color: var(--brown); padding: 16px 32px; border-radius: 100px; font-size: 1rem; font-weight: 500; text-decoration: none; border: 1.5px solid var(--border); transition: all 0.25s ease; }
-  .btn-secondary:hover { border-color: var(--sage); color: var(--sage-dark); }
-  .hero-right { position: relative; display: flex; align-items: center; justify-content: center; }
-  .hero-illustration { width: 90%; max-width: 480px; aspect-ratio: 1; position: relative; }
-  .circle-bg { position: absolute; inset: 5%; border-radius: 50%; background: linear-gradient(135deg, rgba(122,158,126,0.15), rgba(196,113,74,0.1)); border: 1.5px solid rgba(122,158,126,0.2); }
-  .float-card { position: absolute; background: #fff; border-radius: 16px; padding: 16px 20px; box-shadow: 0 8px 32px rgba(46,37,32,0.10); font-size: 0.88rem; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 10px; white-space: nowrap; animation: float 4s ease-in-out infinite; }
-  .float-card .icon { font-size: 1.4em; }
-  .float-card .label { color: var(--text-mid); font-weight: 300; font-size: 0.78rem; display: block; }
-  .fc1 { top: 12%; left: -2%; animation-delay: 0s; }
-  .fc2 { top: 38%; right: -5%; animation-delay: 0.8s; }
-  .fc3 { bottom: 18%; left: 5%; animation-delay: 1.6s; }
-  .fc4 { bottom: 30%; right: 8%; animation-delay: 2.4s; }
-  .big-emoji { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 7rem; filter: drop-shadow(0 12px 24px rgba(46,37,32,0.1)); animation: gentleSpin 20s linear infinite; }
-  .trust { background: var(--sage-dark); color: #fff; padding: 18px 40px; display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; }
-  .trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; opacity: 0.92; }
-  .trust-item span:first-child { font-size: 1.2em; }
-  section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
-  .section-label { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terracotta); font-weight: 500; margin-bottom: 14px; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--brown); line-height: 1.2; margin-bottom: 16px; }
-  .section-sub { font-size: 1.05rem; color: var(--text-mid); font-weight: 300; line-height: 1.7; max-width: 520px; margin-bottom: 60px; }
-  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-  .service-card { background: #fff; border: 1.5px solid var(--border); border-radius: 20px; padding: 32px; transition: all 0.3s ease; position: relative; overflow: hidden; }
-  .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--sage), var(--sage-light)); opacity: 0; transition: opacity 0.3s; }
-  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(46,37,32,0.10); border-color: var(--sage-light); }
-  .service-card:hover::before { opacity: 1; }
-  .service-card.featured { background: var(--sage-dark); border-color: var(--sage-dark); color: #fff; }
-  .service-card.featured::before { opacity: 1; background: linear-gradient(90deg, var(--terracotta), #E8956D); }
-  .service-card.featured .service-desc { color: rgba(255,255,255,0.75); }
-  .service-card.featured .price-tag { color: #fff; }
-  .service-card.featured .price-note { color: rgba(255,255,255,0.6); }
-  .service-card.featured .service-includes li { color: rgba(255,255,255,0.8); }
-  .service-card.featured .service-includes li::before { color: rgba(255,255,255,0.5); }
-  .service-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
-  .service-name { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--brown); margin-bottom: 8px; }
-  .service-card.featured .service-name { color: #fff; }
-  .service-desc { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; margin-bottom: 20px; font-weight: 300; }
-  .price-tag { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--sage-dark); font-weight: 600; margin-bottom: 4px; }
-  .price-note { font-size: 0.82rem; color: var(--text-light); margin-bottom: 20px; }
-  .service-includes { list-style: none; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 4px; }
-  .service-card.featured .service-includes { border-color: rgba(255,255,255,0.15); }
-  .service-includes li { font-size: 0.88rem; color: var(--text-mid); padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; }
-  .service-includes li::before { content: '✓'; color: var(--sage); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-  .addons-inner { max-width: 1200px; margin: 0 auto; padding: 80px 40px; }
-  .addons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 40px; }
-  .addon-pill { background: #fff; border: 1.5px solid var(--border); border-radius: 14px; padding: 20px 22px; transition: all 0.25s; }
-  .addon-pill:hover { border-color: var(--terracotta); transform: translateY(-2px); }
-  .addon-icon { font-size: 1.5rem; margin-bottom: 10px; display: block; }
-  .addon-name { font-weight: 500; font-size: 0.95rem; margin-bottom: 4px; }
-  .addon-price { font-size: 0.85rem; color: var(--terracotta); font-weight: 500; }
-  .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-  .step-number { width: 48px; height: 48px; border-radius: 50%; background: var(--sage-light); color: var(--sage-dark); font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-  .step-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--brown); margin-bottom: 10px; }
-  .step-desc { font-size: 0.92rem; color: var(--text-mid); line-height: 1.7; font-weight: 300; }
-  .avail-section { background: linear-gradient(135deg, var(--brown) 0%, #3D2416 100%); padding: 80px 40px; margin: 0; max-width: 100%; width: 100%; }
-  .avail-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .avail-section .section-label { color: var(--sage-light); }
-  .avail-section .section-title { color: #fff; }
-  .avail-section .section-sub { color: rgba(255,255,255,0.65); margin-bottom: 40px; }
-  .avail-chips { display: flex; gap: 12px; flex-wrap: wrap; }
-  .chip { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 20px; border-radius: 100px; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; }
-  .contact-card { background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 44px; text-align: center; }
-  .contact-card .icon-big { font-size: 3rem; margin-bottom: 20px; display: block; }
-  .contact-card h3 { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.6rem; margin-bottom: 12px; }
-  .contact-card p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; font-weight: 300; }
-  .btn-facebook { background: #1877F2; color: #fff; padding: 16px 36px; border-radius: 100px; font-size: 1rem; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.25s; box-shadow: 0 4px 20px rgba(24,119,242,0.4); }
-  footer { background: var(--cream); border-top: 1px solid var(--border); padding: 32px 40px; text-align: center; font-size: 0.85rem; color: var(--text-light); }
-  footer strong { color: var(--text-mid); }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-  @keyframes gentleSpin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
-  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; min-height: auto; } .hero-left { padding: 80px 32px 40px; } .hero-right { min-height: 360px; padding: 20px 32px 60px; } .how-grid { grid-template-columns: 1fr; gap: 32px; } .avail-inner { grid-template-columns: 1fr; gap: 48px; } .trust { gap: 24px; } }
-  @media (max-width: 600px) { section { padding: 60px 24px; } .hero-left { padding: 60px 24px 32px; } .avail-section { padding: 60px 24px; } .addons-inner { padding: 60px 24px; } footer { padding: 24px; } }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mrs Mops - Reliable housekeeping and cleaning services in Hexham and the Tyne Valley. From £15/hr. Local, friendly, and trusted.">
+  <title>Mrs Mops — Housekeeping & Cleaning in Hexham & the Tyne Valley</title>
+
+  <!-- Fonts: Lobster (retro script) for headings, Quicksand for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       PALETTE — 1950s kitchen / retro homemaker
+       ============================================ */
+    :root {
+      --cream:        #fdf6e9;
+      --cream-deep:   #f7ead0;
+      --pink:         #e8a5a5;
+      --pink-deep:    #d97a7a;
+      --pink-soft:    #f5d4d4;
+      --sage:         #a8b89a;
+      --sage-deep:    #7d9070;
+      --teal:         #4a8a8a;
+      --charcoal:     #2c2826;
+      --ink:          #4a3f3a;
+      --gold:         #c9a14a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+      font-weight: 500;
+      overflow-x: hidden;
+    }
+
+    /* Subtle polka dot background overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(217, 122, 122, 0.06) 1px, transparent 1.5px);
+      background-size: 24px 24px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Lobster', cursive;
+      color: var(--pink-deep);
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    /* ============================================
+       TOP RIBBON
+       ============================================ */
+    .ribbon {
+      background: var(--pink-deep);
+      color: var(--cream);
+      text-align: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 2;
+    }
+    .ribbon span { margin: 0 1rem; }
+
+    /* ============================================
+       NAV
+       ============================================ */
+    nav {
+      background: var(--cream);
+      padding: 1rem 1.5rem;
+      border-bottom: 2px dashed var(--pink-soft);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+      color: var(--pink-deep);
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--pink-soft);
+      background: var(--cream);
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--pink-deep); }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+    }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    .hero {
+      padding: 4rem 1.5rem 5rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--pink-soft);
+      color: var(--pink-deep);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 .accent {
+      color: var(--sage-deep);
+      font-style: italic;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+      color: var(--ink);
+    }
+    .hero-cta {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .btn-primary {
+      background: var(--pink-deep);
+      color: var(--cream);
+    }
+    .btn-primary:hover {
+      background: var(--charcoal);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--pink-deep);
+      border-color: var(--pink-deep);
+    }
+    .btn-secondary:hover {
+      background: var(--pink-deep);
+      color: var(--cream);
+    }
+
+    /* Decorative dots floating around hero */
+    .hero::before, .hero::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      opacity: 0.25;
+      z-index: 1;
+    }
+    .hero::before {
+      background: var(--sage);
+      top: 10%;
+      left: 5%;
+    }
+    .hero::after {
+      background: var(--pink-soft);
+      bottom: 10%;
+      right: 5%;
+    }
+    @media (max-width: 720px) {
+      .hero::before, .hero::after { display: none; }
+    }
+
+    /* ============================================
+       QUICK FACTS BAR
+       ============================================ */
+    .facts {
+      background: var(--cream-deep);
+      padding: 2rem 1.5rem;
+      border-top: 3px solid var(--pink-soft);
+      border-bottom: 3px solid var(--pink-soft);
+    }
+    .facts-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .fact {
+      padding: 0.5rem;
+    }
+    .fact-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 0.5rem;
+      color: var(--sage-deep);
+    }
+    .fact-label {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
+    /* ============================================
+       SECTIONS
+       ============================================ */
+    section {
+      padding: 5rem 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+    }
+    .section-eyebrow {
+      display: inline-block;
+      color: var(--sage-deep);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .section-header h2 {
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      margin-bottom: 0.75rem;
+    }
+    .section-header p {
+      color: var(--ink);
+      opacity: 0.85;
+    }
+
+    /* ============================================
+       SERVICES
+       ============================================ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .service-card {
+      background: var(--cream);
+      border: 2px solid var(--pink-soft);
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--pink);
+    }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--pink-deep);
+      margin-bottom: 1rem;
+    }
+    .service-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+    .service-desc {
+      color: var(--ink);
+      opacity: 0.85;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .service-price {
+      display: inline-block;
+      background: var(--pink-soft);
+      color: var(--pink-deep);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .service-note {
+      font-size: 0.8rem;
+      color: var(--ink);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .service-features {
+      list-style: none;
+      padding: 0;
+      border-top: 1px dashed var(--pink-soft);
+      padding-top: 1rem;
+    }
+    .service-features li {
+      padding: 0.3rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      font-size: 0.9rem;
+    }
+    .service-features li::before {
+      content: "✿";
+      position: absolute;
+      left: 0;
+      color: var(--pink);
+    }
+
+    /* ============================================
+       ADD-ONS
+       ============================================ */
+    .addons-section {
+      background: var(--cream-deep);
+    }
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .addon-card {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      border: 2px dashed var(--pink-soft);
+    }
+    .addon-icon {
+      width: 36px;
+      height: 36px;
+      color: var(--sage-deep);
+      margin: 0 auto 0.5rem;
+    }
+    .addon-title {
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+    .addon-price {
+      color: var(--pink-deep);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ============================================
+       HOW IT WORKS
+       ============================================ */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .step {
+      text-align: center;
+      padding: 1rem;
+    }
+    .step-num {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--pink-deep);
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lobster', cursive;
+      font-size: 1.75rem;
+      margin: 0 auto 1rem;
+      box-shadow: 0 4px 0 var(--pink-soft);
+    }
+    .step h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--sage-deep);
+    }
+    .step p {
+      font-size: 0.95rem;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* ============================================
+       AVAILABILITY
+       ============================================ */
+    .availability {
+      background: var(--sage);
+      color: var(--cream);
+      position: relative;
+    }
+    .availability::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(253, 246, 233, 0.15) 1px, transparent 1.5px);
+      background-size: 30px 30px;
+      pointer-events: none;
+    }
+    .availability .section-header h2 { color: var(--cream); }
+    .availability .section-eyebrow { color: var(--cream-deep); }
+    .availability .section-header p { color: var(--cream); }
+
+    .availability-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .avail-card {
+      background: rgba(253, 246, 233, 0.15);
+      backdrop-filter: blur(4px);
+      border: 1.5px solid rgba(253, 246, 233, 0.3);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .avail-card svg {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 0.5rem;
+      color: var(--cream);
+    }
+    .avail-card-text {
+      font-weight: 600;
+      color: var(--cream);
+      font-size: 0.95rem;
+    }
+
+    /* ============================================
+       CONTACT
+       ============================================ */
+    .contact {
+      background: var(--cream);
+    }
+    .contact-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 760px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    .contact-info h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .contact-info p {
+      margin-bottom: 1.5rem;
+    }
+    .fb-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--cream-deep);
+      color: var(--ink);
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 2px solid var(--pink-soft);
+      transition: all 0.2s;
+    }
+    .fb-link:hover {
+      border-color: var(--pink);
+      transform: translateY(-2px);
+    }
+    .fb-link svg {
+      width: 20px;
+      height: 20px;
+      color: var(--pink-deep);
+    }
+
+    .contact-form {
+      background: var(--cream-deep);
+      border: 2px solid var(--pink-soft);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--pink-soft);
+      border-radius: 8px;
+      background: var(--cream);
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      color: var(--ink);
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--pink-deep);
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .contact-form button {
+      width: 100%;
+      background: var(--pink-deep);
+      color: var(--cream);
+      padding: 1rem;
+      border: none;
+      border-radius: 999px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-form button:hover {
+      background: var(--charcoal);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    footer .footer-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.75rem;
+      color: var(--pink-soft);
+      margin-bottom: 0.5rem;
+    }
+    footer p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 0.25rem;
+    }
+    footer .small {
+      font-size: 0.8rem;
+      opacity: 0.6;
+      margin-top: 1rem;
+    }
+    footer a {
+      color: var(--pink-soft);
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-<header style="background:#fff; border-bottom:1px solid #E8DDD5; padding:16px 40px; display:flex; justify-content:center; align-items:center;">
-  <img src="logo.png" alt="Mrs Mops Logo" style="height:100px; width:auto;">
-</header>
- <section class="hero" style="max-width:100%; padding:0;">
-  <div class="hero-left">
-    <div class="badge">Hexham &amp; Tyne Valley</div>
-    <h1>A home that feels<br><em>truly clean.</em></h1>
-    <p class="hero-desc">Reliable, personal housekeeping for busy homes across the Tyne Valley. Done properly, every time.</p>
-    <div class="cta-group">
-      <a href="#contact" class="btn-primary">📩 Get in Touch</a>
-      <a href="#services" class="btn-secondary">View Services</a>
-    </div>
+
+  <!-- Top ribbon -->
+  <div class="ribbon">
+    <span>★ Hexham &amp; Tyne Valley ★</span>
+    <span style="display:none;" class="hide-mobile">★ Fully Insured · DBS Checked ★</span>
   </div>
-  <div class="hero-right">
-    <div class="hero-illustration">
-      <div class="circle-bg"></div>
-      <div class="big-emoji">🧺</div>
-      <div class="float-card fc1"><span class="icon">🧼</span><div><strong>Housekeeping</strong><span class="label">From £15/hr</span></div></div>
-      <div class="float-card fc2"><span class="icon">👕</span><div><strong>Ironing</strong><span class="label">From £10</span></div></div>
-      <div class="float-card fc3"><span class="icon">📅</span><div><strong>Weekly &amp; Fortnightly</strong><span class="label">Regular slots available</span></div></div>
-      <div class="float-card fc4"><span class="icon">✨</span><div><strong>Local &amp; Trusted</strong><span class="label">Tyne Valley</span></div></div>
-    </div>
-  </div>
-</section>
-<div class="trust">
-  <div class="trust-item"><span>✅</span> Local to Hexham &amp; Tyne Valley</div>
-  <div class="trust-item"><span>🗓️</span> Weekly or Fortnightly Slots</div>
-  <div class="trust-item"><span>💬</span> Book via Facebook</div>
-  <div class="trust-item"><span>🤝</span> Personal &amp; Reliable Service</div>
-</div>
-<div id="services" style="background: var(--cream);">
-<section>
-  <div class="section-label">What I Offer</div>
-  <h2 class="section-title">Services &amp; Prices</h2>
-  <p class="section-sub">Honest pricing, no hidden fees. Minimum booking of 2 hours for housekeeping.</p>
-  <div class="services-grid">
-    <div class="service-card featured">
-      <span class="service-icon">🧼</span>
-      <div class="service-name">Housekeeping</div>
-      <p class="service-desc">The core service — a thorough, calm home reset that leaves everything feeling fresh.</p>
-      <div class="price-tag">£15/hr</div>
-      <div class="price-note">Minimum 2 hours</div>
-      <ul class="service-includes">
-        <li>General cleaning &amp; tidying</li>
-        <li>Kitchen &amp; bathroom refresh</li>
-        <li>Dusting &amp; hoovering</li>
-        <li>Bed making / changing</li>
-        <li>Home reset — tidy, calm finish</li>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="logo.png" alt="Mrs Mops logo">
+        <span>Mrs Mops</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#availability">Availability</a></li>
+        <li><a href="#contact">Get in Touch</a></li>
       </ul>
     </div>
-    <div class="service-card">
-      <span class="service-icon">👕</span>
-      <div class="service-name">Ironing</div>
-      <p class="service-desc">Clothes, bedding, and everyday items — folded and ready to put away.</p>
-      <div class="price-tag">£15/hr</div>
-      <div class="price-note">Or by basket: small £10–£15 · large £20–£30</div>
-      <ul class="service-includes">
-        <li>Clothes &amp; everyday items</li>
-        <li>Bedding &amp; linens</li>
-        <li>Folded and organised</li>
-      </ul>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">🧺</span>
-      <div class="service-name">Laundry Support</div>
-      <p class="service-desc">Included in your hourly rate, or a small extra for heavier loads.</p>
-      <div class="price-tag">Included</div>
-      <div class="price-note">In hourly rate (small extra for heavy loads)</div>
-      <ul class="service-includes">
-        <li>Washing &amp; hanging</li>
-        <li>Folding &amp; organising</li>
-        <li>Bedding &amp; towels</li>
-      </ul>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">🧹</span>
-      <div class="service-name">Home Organisation</div>
-      <p class="service-desc">Decluttering and resetting the spaces that tend to creep into chaos.</p>
-      <div class="price-tag">£20/hr</div>
-      <div class="price-note">&nbsp;</div>
-      <ul class="service-includes">
-        <li>Wardrobes &amp; cupboards</li>
-        <li>Kitchen organisation</li>
-        <li>General home resets</li>
-        <li>Sorting &amp; simplifying spaces</li>
-      </ul>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">🧽</span>
-      <div class="service-name">Deep Clean</div>
-      <p class="service-desc">Occasional add-on for a more thorough clean — not the main service, but available when needed.</p>
-      <div class="price-tag">£18–£22/hr</div>
-      <div class="price-note">Occasional add-on only</div>
-      <ul class="service-includes">
-        <li>More detailed cleaning</li>
-        <li>Skirting boards &amp; cupboards (light)</li>
-        <li>Build-up areas</li>
-      </ul>
-    </div>
-  </div>
-</section>
-</div>
-<div style="background: var(--warm-white);">
-<div class="addons-inner">
-  <div class="section-label">Little Extras</div>
-  <h2 class="section-title">Optional Add-Ons</h2>
-  <p class="section-sub">Added within your visit time, or quoted separately.</p>
-  <div class="addons-grid">
-    <div class="addon-pill"><span class="addon-icon">🧊</span><div class="addon-name">Fridge Clean</div><div class="addon-price">£10–£20</div></div>
-    <div class="addon-pill"><span class="addon-icon">🔥</span><div class="addon-name">Light Oven Clean</div><div class="addon-price">£15–£25</div></div>
-    <div class="addon-pill"><span class="addon-icon">🪟</span><div class="addon-name">Interior Windows</div><div class="addon-price">Included in time</div></div>
-    <div class="addon-pill"><span class="addon-icon">📦</span><div class="addon-name">Extra Organisation</div><div class="addon-price">£20/hr</div></div>
-  </div>
-</div>
-</div>
-<section>
-  <div class="section-label">Simple Process</div>
-  <h2 class="section-title">How It Works</h2>
-  <p class="section-sub">No fuss, no complicated booking systems — just a friendly message to get started.</p>
-  <div class="how-grid">
-    <div class="how-step"><div class="step-number">1</div><div class="step-title">Message on Facebook</div><p class="step-desc">Send a message via Facebook to say what you're looking for and where you're based in the Tyne Valley.</p></div>
-    <div class="how-step"><div class="step-number">2</div><div class="step-title">We'll Sort the Details</div><p class="step-desc">We'll have a quick chat about what you need, how often, and find a time that works for you.</p></div>
-    <div class="how-step"><div class="step-number">3</div><div class="step-title">Enjoy a Cleaner Home</div><p class="step-desc">Come home to a calm, fresh space — regularly, reliably, and done with care.</p></div>
-  </div>
-</section>
-<div id="contact">
-<section class="avail-section">
-  <div class="avail-inner">
-    <div>
-      <div class="section-label">Availability</div>
-      <h2 class="section-title">Regular Slots Available</h2>
-      <p class="section-sub">I keep it local and personal — taking on a small number of regular clients in the Hexham and Tyne Valley area.</p>
-      <div class="avail-chips">
-        <div class="chip">📅 Weekly visits</div>
-        <div class="chip">📅 Fortnightly visits</div>
-        <div class="chip">📍 Hexham &amp; Tyne Valley only</div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="hero-tag">Hexham &amp; Tyne Valley</span>
+      <h1>A home that feels <span class="accent">truly clean.</span></h1>
+      <p>Reliable, personal housekeeping for busy homes across the Tyne Valley. Done properly, every time — with a smile.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <a href="#services" class="btn btn-secondary">See Services</a>
       </div>
-     <div class="chip">✅ Fully Insured</div>
-<div class="chip">🔒 DBS Checked</div>
     </div>
-    <div class="contact-card">
-      <span class="icon-big">💬</span>
-      <h3>Ready to book?</h3>
-      <p>Drop a message on Facebook and I'll get back to you. No forms, no faff — just a friendly chat.</p>
-     
-        <a href="https://www.facebook.com/share/1B7GVFdhkv/?mibextid=wwXIfr" target="_blank" class="btn-facebook">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-  Message on Facebook
-</a>
+  </header>
+
+  <!-- Quick facts -->
+  <section class="facts" style="padding-top: 2rem; padding-bottom: 2rem;">
+    <div class="facts-grid">
+      <div class="fact">
+        <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <div class="fact-label">Local to Hexham</div>
+      </div>
+      <div class="fact">
+        <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <div class="fact-label">Weekly or Fortnightly</div>
+      </div>
+      <div class="fact">
+        <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        <div class="fact-label">Fully Insured</div>
+      </div>
+      <div class="fact">
+        <svg class="fact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+        <div class="fact-label">DBS Checked</div>
+      </div>
     </div>
-  </div>
-</section>
-</div>
-<footer>
-  <strong>Mrs Mops</strong> · Housekeeping &amp; Cleaning Services · Hexham &amp; Tyne Valley<br>
-  <span style="margin-top:6px;display:inline-block;">Book via Facebook · Local clients only · £15/hr housekeeping · £20/hr organisation</span>
-</footer>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="section-header">
+      <span class="section-eyebrow">What I Offer</span>
+      <h2>Services &amp; Prices</h2>
+      <p>Honest pricing, no hidden fees. Minimum booking of 2 hours for housekeeping.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+        <h3>Housekeeping</h3>
+        <p class="service-desc">The core service — a thorough, calm home reset that leaves everything feeling fresh.</p>
+        <span class="service-price">£15/hr</span>
+        <div class="service-note">Minimum 2 hours</div>
+        <ul class="service-features">
+          <li>General cleaning &amp; tidying</li>
+          <li>Kitchen &amp; bathroom refresh</li>
+          <li>Dusting &amp; hoovering</li>
+          <li>Bed making / changing</li>
+          <li>Home reset — tidy, calm finish</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18l-2 14H5L3 6z"/><path d="M8 6V4a4 4 0 0 1 8 0v2"/></svg>
+        <h3>Ironing</h3>
+        <p class="service-desc">Clothes, bedding, and everyday items — folded and ready to put away.</p>
+        <span class="service-price">£15/hr</span>
+        <div class="service-note">Or by basket: small £10–£15 · large £20–£30</div>
+        <ul class="service-features">
+          <li>Clothes &amp; everyday items</li>
+          <li>Bedding &amp; linens</li>
+          <li>Folded and organised</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M3 12h18"/></svg>
+        <h3>Laundry Support</h3>
+        <p class="service-desc">Included in your hourly rate, or a small extra for heavier loads.</p>
+        <span class="service-price">Included</span>
+        <div class="service-note">In hourly rate (small extra for heavy loads)</div>
+        <ul class="service-features">
+          <li>Washing &amp; hanging</li>
+          <li>Folding &amp; organising</li>
+          <li>Bedding &amp; towels</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v4H3zM3 13h18v8H3zM3 3h18v4H3z"/></svg>
+        <h3>Home Organisation</h3>
+        <p class="service-desc">Decluttering and resetting the spaces that tend to creep into chaos.</p>
+        <span class="service-price">£20/hr</span>
+        <div class="service-note">&nbsp;</div>
+        <ul class="service-features">
+          <li>Wardrobes &amp; cupboards</li>
+          <li>Kitchen organisation</li>
+          <li>General home resets</li>
+          <li>Sorting &amp; simplifying spaces</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8M8 6h8M5 10h14l-1.5 12h-11z"/></svg>
+        <h3>Deep Clean</h3>
+        <p class="service-desc">Occasional add-on for a more thorough clean — not the main service, but available when needed.</p>
+        <span class="service-price">£18–£22/hr</span>
+        <div class="service-note">Occasional add-on only</div>
+        <ul class="service-features">
+          <li>More detailed cleaning</li>
+          <li>Skirting boards &amp; cupboards (light)</li>
+          <li>Build-up areas</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Add-ons -->
+  <section class="addons-section">
+    <div class="section-header">
+      <span class="section-eyebrow">Little Extras</span>
+      <h2>Optional Add-Ons</h2>
+      <p>Added within your visit time, or quoted separately.</p>
+    </div>
+    <div class="addons-grid">
+      <div class="addon-card">
+        <svg class="addon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M5 11h14M9 6v2M9 15v2"/></svg>
+        <div class="addon-title">Fridge Clean</div>
+        <div class="addon-price">£10–£20</div>
+      </div>
+      <div class="addon-card">
+        <svg class="addon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 4v3M16 4v3"/></svg>
+        <div class="addon-title">Light Oven Clean</div>
+        <div class="addon-price">£15–£25</div>
+      </div>
+      <div class="addon-card">
+        <svg class="addon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 12h18M12 3v18"/></svg>
+        <div class="addon-title">Interior Windows</div>
+        <div class="addon-price">Included in time</div>
+      </div>
+      <div class="addon-card">
+        <svg class="addon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v13H3zM8 7V4h8v3"/></svg>
+        <div class="addon-title">Extra Organisation</div>
+        <div class="addon-price">£20/hr</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how">
+    <div class="section-header">
+      <span class="section-eyebrow">Simple Process</span>
+      <h2>How It Works</h2>
+      <p>No fuss, no complicated booking systems — just a friendly message to get started.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Get in Touch</h3>
+        <p>Send a message via Facebook or fill out the form below — let me know what you're after.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>We'll Sort the Details</h3>
+        <p>A quick chat about what you need, how often, and find a time that works for you.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Enjoy a Cleaner Home</h3>
+        <p>Come home to a calm, fresh space — regularly, reliably, and done with care.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Availability -->
+  <section id="availability" class="availability">
+    <div class="section-header">
+      <span class="section-eyebrow">Availability</span>
+      <h2>Regular Slots Available</h2>
+      <p>Keeping it local and personal — taking on a small number of regular clients in the Hexham &amp; Tyne Valley area.</p>
+    </div>
+    <div class="availability-grid">
+      <div class="avail-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <div class="avail-card-text">Weekly visits</div>
+      </div>
+      <div class="avail-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h2M14 14h2M8 18h2"/></svg>
+        <div class="avail-card-text">Fortnightly visits</div>
+      </div>
+      <div class="avail-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <div class="avail-card-text">Hexham &amp; Tyne Valley only</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="section-eyebrow">Get in Touch</span>
+        <h2>Ready to book?</h2>
+        <p>Drop a message via the form, or send a quick note on Facebook — whichever you prefer. No forms-to-fill faff, just a friendly chat.</p>
+        <a href="https://www.facebook.com/share/1B7GVFdhkv/?mibextid=wwXIfr" class="fb-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88V14.9H7.9V12h2.54V9.8c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.9h-2.33v6.98A10 10 0 0 0 22 12z"/></svg>
+          Message on Facebook
+        </a>
+      </div>
+
+      <!-- Netlify form: data-netlify="true" enables form handling -->
+      <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+        <div class="form-group">
+          <label for="service">What are you after?</label>
+          <select id="service" name="service">
+            <option value="Housekeeping">Housekeeping</option>
+            <option value="Ironing">Ironing</option>
+            <option value="Home Organisation">Home Organisation</option>
+            <option value="Deep Clean">Deep Clean</option>
+            <option value="Not sure">Not sure — just chat</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">A few details</label>
+          <textarea id="message" name="message" placeholder="Where you're based, how often, anything else worth knowing..." required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Mrs Mops</div>
+    <p>Housekeeping &amp; Cleaning Services · Hexham &amp; Tyne Valley</p>
+    <p>£15/hr housekeeping · £20/hr organisation · Local clients only</p>
+    <p class="small">© Mrs Mops Housekeeping Services. Website by <a href="https://clientgrowthhq.co.uk" target="_blank" rel="noopener">Client Growth HQ</a>.</p>
+  </footer>
+
 </body>
 </html>
